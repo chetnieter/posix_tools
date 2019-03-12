@@ -1,0 +1,35 @@
+#!/usr/bin/env python3
+import argparse
+import getpass
+import platform
+import sys
+import subprocess
+from os.path import expanduser
+from urllib.parse import quote
+
+parser = argparse.ArgumentParser()
+parser.add_argument('domain', help='domain to mount')
+args = parser.parse_args()
+
+password = quote(getpass.getpass())
+
+domain = 'krsdata1'
+
+drives = ['fouo', 'exportcont', 'other']
+
+my_os = platform.platform()
+
+mnt_cmd = ['mount', '-t']
+
+if my_os.startswith('Darwin'):
+    mnt_cmd.append('smbfs')
+elif my_os.startswith('Linux'):
+    mnt_cmd.append('cifs')
+else:
+    sys.exit(1)
+
+for d in drives:
+    d_args = ['//chet.nieter:{}@{}/{}'.format(password,args.domain,d), 
+              expanduser('~/network/{}/{}'.format(args.domain,d))]
+    subprocess.call(mnt_cmd + d_args)
+
