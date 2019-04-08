@@ -1,0 +1,10 @@
+#!/usr/bin/env python3
+
+import sys
+from skimage import io
+
+if len(sys.argv) > 1:
+    img = io.imread(sys.argv[1])
+    io.imshow(img)
+    io.show()
+
