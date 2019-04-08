@@ -9,8 +9,8 @@ else
 fi
 
 # Read Password
-echo -n Password: 
-read -s password
+read -p "Password:" -rs password
+password=`tohex "$password"`
 echo
 
 # Mount command
@@ -28,7 +28,9 @@ drives=(
     fouo
     other
 )
+
 for d in "${drives[@]}"; do
     tmp_cmd="$cmd //chet.nieter:$password@$hostname/$d $HOME/network/$hostname/$d"
-    echo "$tmp_cmd"
+    $tmp_cmd
 done
+
