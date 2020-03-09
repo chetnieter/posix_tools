@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/usr/local/krb5/bin/kinit cnieter@HPCMP.HPC.MIL
+

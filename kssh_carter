@@ -1,0 +1,4 @@
+#!/bin/bash
+
+/usr/local/ossh/bin/ssh cnieter@carter01.afrl.hpc.mil
+
