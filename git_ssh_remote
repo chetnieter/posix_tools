@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+import subprocess
+
+# Find the current remotes
+rslt = subprocess.run(['git', 'remote', '-vv'], capture_output=True)
+
+remotes = {}
+for l in rslt.stdout.decode('ascii').splitlines():
+  cols = l.split()
+  if cols[0] not in remotes:
+    remotes[cols[0]] = cols[1]
+
+for rmt in remotes:
+  if remotes[rmt].startswith('https'):
+    new_remote = remotes[rmt].replace('https://','ssh://git@')
+    cmd = ['git', 'remote', 'set-url', rmt, new_remote]
+    print(' '.join(cmd))
+    subprocess.run(cmd)
+
