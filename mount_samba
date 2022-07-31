@@ -23,7 +23,7 @@ my_os = platform.platform()
 
 mnt_cmd = ['mount', '-t']
 
-if my_os.startswith('Darwin'):
+if my_os.startswith('Darwin') or my_os.startswith('macOS-12.5-arm64-arm-64bit'):
     mnt_cmd.append('smbfs')
 elif my_os.startswith('Linux'):
     mnt_cmd.append('cifs')
