@@ -23,11 +23,12 @@ my_os = platform.platform()
 
 mnt_cmd = ['mount', '-t']
 
-if my_os.startswith('Darwin') or my_os.startswith('macOS-12.5-arm64-arm-64bit'):
+if my_os.startswith('Darwin') or my_os.startswith('macOS-12'):
     mnt_cmd.append('smbfs')
 elif my_os.startswith('Linux'):
     mnt_cmd.append('cifs')
 else:
+    print('Unknown os: ', my_os)
     sys.exit(1)
 
 for serv in args.domains:
@@ -35,5 +36,6 @@ for serv in args.domains:
         print('Mounting {} from {}'.format(d, serv))
         d_args = ['//chet.nieter:{}@{}/{}'.format(password,serv,d), 
                   expanduser('~/network/{}/{}'.format(serv,d))]
+        #print(' '.join(mnt_cmd + d_args))
         subprocess.call(mnt_cmd + d_args)
 
