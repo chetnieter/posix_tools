@@ -34,7 +34,7 @@ else:
 for serv in args.domains:
     for d in drives:
         print('Mounting {} from {}'.format(d, serv))
-        d_args = ['//{}/{}'.format(serv,d), 
+        d_args = ['//{}.kitware.com/{}'.format(serv,d),
                   expanduser('~/network/{}/{}'.format(serv,d))]
         #print(' '.join(mnt_cmd + d_args))
         subprocess.call(mnt_cmd + d_args)
